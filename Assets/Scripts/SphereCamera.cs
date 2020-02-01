@@ -11,6 +11,9 @@ public class SphereCamera : MonoBehaviour
     float x;
     float y;
 
+    float smoothX;
+    float smoothY;
+
     public float xSpeed;
     public float ySpeed;
 
@@ -38,6 +41,10 @@ public class SphereCamera : MonoBehaviour
     public float decreaseFactor = 1.0f;
 
     float shakeTimer;
+
+    [Header("Smoothing")]
+    public float pivotSmoothTime = 1f;
+    Vector3 pivotSpeed;
 
 
 
@@ -75,13 +82,39 @@ public class SphereCamera : MonoBehaviour
         xDelta = GetCameraAxis("Mouse X") * xSpeed * distance;
         yDelta = GetCameraAxis("Mouse Y") * ySpeed * distance;
 
+        float prevX = x;
+        float prevY = y;
+
         x += inverseXAxis ? xDelta : -xDelta;
         y += InverseYAxis ? yDelta : -yDelta;
 
+        //if (y > yMaxLimit)
+        //{
+        //   y = yMaxLimit;
+        //}
+        //else if (y < yMinLimit)
+        //{
+        //    y = yMinLimit;
+        //}
+
+        //y = ClampAngle(y, yMinLimit, yMaxLimit);
+
+
+        smoothX = Mathf.Lerp(smoothX, x, Time.deltaTime * pivotSmoothTime);
+        smoothY = Mathf.Lerp(smoothY, y, Time.deltaTime * pivotSmoothTime);
+
+        //xDelta = prevX - smoothX;
+        //yDelta = prevY - smoothX;
 
         xDelta = inverseXAxis ? xDelta : -xDelta;
         yDelta = InverseYAxis ? yDelta : -yDelta;
 
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    //start camera shake
+        //    StartCameraShake();
+
+        //}
         if (y > yMaxLimit)
         {
             yDelta -= (y - yMaxLimit);
@@ -90,17 +123,7 @@ public class SphereCamera : MonoBehaviour
         {
             yDelta += (yMinLimit - y);
         }
-
         y = ClampAngle(y, yMinLimit, yMaxLimit);
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            //start camera shake
-            cameraShaking = true;
-            shakeTimer = 0.0f;
-            cameraCenterPos = transform.localPosition;
-
-        }
 
 
     }
@@ -127,6 +150,9 @@ public class SphereCamera : MonoBehaviour
         Vector3 characerOffset = follow.transform.rotation * lookAtOffset;
         pivot.position = follow.transform.position + characerOffset;
 
+        //pivot.position = Vector3.SmoothDamp(pivot.position, follow.transform.position + characerOffset, ref pivotSpeed ,pivotSmoothTime);
+        //pivot.position = Vector3.Lerp(pivot.position, follow.transform.position + characerOffset, Time.deltaTime * pivotSmoothTime);
+
         //rotate pivot to be in follow rotation
         //pivot.rotation = follow.transform.rotation;
 
@@ -143,12 +169,10 @@ public class SphereCamera : MonoBehaviour
 
         //pivot.rotation = follow.transform.rotation;
 
-        Quaternion rotWorld = follow.transform.rotation * newRotLocal;
+        //Quaternion rotWorld = follow.transform.rotation * newRotLocal;
 
         transform.RotateAround(pivot.position, pivot.up, xDelta);
         transform.RotateAround(pivot.position, transform.right, yDelta);
-
-
 
     }
 
@@ -159,9 +183,6 @@ public class SphereCamera : MonoBehaviour
         if (shakeTimer < shakeDuration)
         {
             float amplitude = Mathf.Exp(decreaseFactor * -shakeTimer);
-            //float amplitude = Mathf.Lerp(shakeAmount, 0.0f,  1 - shakeTimer / shakeDuration);
-            //float x = Random.Range(-1f, 1f) * shakeAmount;
-            //float y = Random.Range(-1f, 1f) * shakeAmount;
             Debug.Log(amplitude);
 
             //transform.localPosition = new Vector3(x, y, cameraCenterPos.z);
@@ -176,6 +197,19 @@ public class SphereCamera : MonoBehaviour
             cameraShaking = false;
             transform.localPosition = cameraCenterPos;
         }
+    }
+
+    public void StartCameraShake()
+    {
+        if (cameraShaking == true)
+        {
+            transform.localPosition = cameraCenterPos;
+        }
+
+
+        cameraShaking = true;
+        shakeTimer = 0.0f;
+        cameraCenterPos = transform.localPosition;
     }
 
 
