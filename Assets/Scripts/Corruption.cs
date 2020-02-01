@@ -19,6 +19,8 @@ public class Corruption : MonoBehaviour
     public bool cantpress = true;
 
     public bool checkList;
+
+   
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && cantpress == true)
