@@ -70,35 +70,13 @@ public class PlayerController : MonoBehaviour
 
         inputDirection = Quaternion.Euler(0, localRot.eulerAngles.y, 0) * inputDirection;
 
-        //Quaternion movementQuat = Quaternion.Euler(inputDirection.z, 0f, inputDirection.x);
 
+        // rotate the character towards movement 
 
-
-        // horizontal - theta
-        // vertical - phi
-
-        //polarTransform.theta += h * Time.deltaTime * angularMovementSpeed;
-        //polarTransform.phi += v * Time.deltaTime * angularMovementSpeed;
-
-        //Vector3 movePos = PolarToCartesian(polarTransform);
-
-
-        //rotate for the new rotation
-        //positionDir = movementQuat * positionDir;
-
-        //turn into coordiantes
-        //Vector3 direction = positionDir * Vector3.up;
-
-        //cc.Move(movePos);
-
-
-        //transfo
-        // where the character is facing
-        //transform.LookAt(transform.position + transform.TransformDirection(inputDirection), transform.up);
-
-        if (cc)
+        //transform.LookAt(transform.TransformDirection(inputDirection), rb.transform.up);
+        if (!inputDirection.Equals(Vector3.zero))
         {
-            //cc.Move(transform.position + transform.TransformDirection(inputDirection));
+            transform.rotation = Quaternion.LookRotation(transform.TransformDirection(inputDirection), rb.transform.up);
         }
 
 
@@ -109,6 +87,7 @@ public class PlayerController : MonoBehaviour
         //rb.velocity = transform.TransformDirection(inputDirection);
         //rb.AddForce(transform.TransformDirection(inputDirection) * 1000f);
         rb.MovePosition(rb.position + transform.TransformDirection(inputDirection));
+
     }
 
     Vector3 PolarToCartesian(PolarCoordiantes pc)
