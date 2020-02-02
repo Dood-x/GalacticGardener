@@ -14,6 +14,7 @@ TagManager:
   - AssT3
   - AssT4
   - CorruptionManager
+  - PauseMenu
   layers:
   - Default
   - TransparentFX
