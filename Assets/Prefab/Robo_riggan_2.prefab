@@ -202,6 +202,7 @@ GameObject:
   - component: {fileID: 7827812571975957026}
   - component: {fileID: 7827812571975957028}
   - component: {fileID: 8296172667604846272}
+  - component: {fileID: 1050423639119151074}
   m_Layer: 0
   m_Name: Robo_riggan_2
   m_TagString: Player
@@ -327,6 +328,21 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 2.25
   m_Center: {x: 0, y: 1.44, z: 0}
+--- !u!114 &1050423639119151074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2269839610927989840}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a267dbd18aa5d6d4aa1dde3720e376fa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FuelBar: {fileID: 0}
+  fuel: 0
+  MaxFuel: 0
 --- !u!1 &2646362784729005569
 GameObject:
   m_ObjectHideFlags: 0
