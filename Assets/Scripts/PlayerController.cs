@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using ThirdPersonCameraWithLockOn;
 
 public class PlayerController : MonoBehaviour
 {
