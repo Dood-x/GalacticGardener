@@ -12,15 +12,32 @@ public class PlayerController : MonoBehaviour
 
     public float gravity = -12f;
 
-    public ThirdPersonCamera cam;
+    public SphereCamera cam;
+
+    Animator anim;
 
     [Header("Movement")]
     //movement speed in degrees
     public float angularMovementSpeed;
     public Vector3 gravityUp;
 
+    public float moveSpeed = 1f;
+
     public float turnRotationSpeed = 10f;
 
+
+    [Header("MovementAnimation")]
+
+    public Transform leftFoot;
+    public Transform rightFoot;
+
+    public ParticleSystem dustParticleSystem;
+
+
+    [Header("Sound")]
+
+    public AudioClip movingSound;
+    public AudioClip stompSound;
 
     // in degrees
     struct PolarCoordiantes
@@ -52,7 +69,8 @@ public class PlayerController : MonoBehaviour
         if(cc)
         {
         }
-        
+
+        anim = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -72,7 +90,10 @@ public class PlayerController : MonoBehaviour
 
         inputDirection = Quaternion.Euler(0, localRot.eulerAngles.y, 0) * inputDirection;
 
-
+        if(anim)
+        {
+            anim.SetFloat("Speed", inputDirection.magnitude);
+        }
         // rotate the character towards movement 
 
         //transform.LookAt(transform.TransformDirection(inputDirection), rb.transform.up);
@@ -95,7 +116,7 @@ public class PlayerController : MonoBehaviour
     {
         //rb.velocity = transform.TransformDirection(inputDirection);
         //rb.AddForce(transform.TransformDirection(inputDirection) * 1000f);
-        rb.MovePosition(rb.position + transform.TransformDirection(inputDirection));
+        rb.MovePosition(rb.position + transform.TransformDirection(inputDirection) * moveSpeed * Time.fixedDeltaTime);
 
     }
 
@@ -133,5 +154,26 @@ public class PlayerController : MonoBehaviour
         return pc;
     }
 
-    
+
+    void PlayStomp()
+    { }
+
+    void PlayMechanicalMoving()
+    { }
+
+    public void StompLeftFoot()
+    {
+        cam.StartCameraShake();
+        Instantiate(dustParticleSystem, leftFoot.position, transform.rotation);
+        //play sound
+    }
+
+    public void StompRightFoot()
+    {
+        cam.StartCameraShake();
+        Instantiate(dustParticleSystem, rightFoot.position, transform.rotation);
+        //play sound
+    }
+
+
 }
