@@ -45,7 +45,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recorruptTimeMin: 2
   recorruptTimeMax: 4
+  tutorialCanvas: {fileID: 1565584013319646211, guid: 61b95a71d7ddbb44c8567658981bdece,
+    type: 3}
+  winCanvas: {fileID: 73211673658806752, guid: 2e72ea1fbd27328448bd00ee52624b00, type: 3}
   corruptionParticle: {fileID: 960280492799160903, guid: 1e800605f2cbe08478983d531c543ccc,
     type: 3}
   healedParticle: {fileID: 1951035673064964745, guid: c0664c5e89422354ea62a0c0208f3f5e,
+    type: 3}
+  assteroidDestruction: {fileID: 1149158190947668614, guid: a04cb84a982d2be49b6bc9760b3a6f1b,
     type: 3}
