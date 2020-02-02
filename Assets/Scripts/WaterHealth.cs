@@ -16,6 +16,7 @@ public class WaterHealth : MonoBehaviour
         }
     }
 
+
     public void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Player")
@@ -23,5 +24,6 @@ public class WaterHealth : MonoBehaviour
             other.gameObject.GetComponent<Player>();
         }
     }
+
    
 }
