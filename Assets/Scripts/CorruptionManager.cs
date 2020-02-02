@@ -50,6 +50,7 @@ public class CorruptionManager : MonoBehaviour
 
         StartCoroutine("DestoryHealParticles", psinstance);
         Destroy(cs.gameObject);
+        FindObjectOfType<AudioManager>().Play("Crystal");
 
         if (resolvedSources == sources)
         {

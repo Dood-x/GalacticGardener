@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 using ThirdPersonCameraWithLockOn;
 
 public class PlayerController : MonoBehaviour
@@ -162,6 +163,7 @@ public class PlayerController : MonoBehaviour
         cam.StartCameraShake();
         Instantiate(dustParticleSystem, leftFoot.position, transform.rotation * Quaternion.Euler(-90, 0, 0));
         //play sound
+        FindObjectOfType<AudioManager>().Play("Hodanje");
     }
 
     public void StompRightFoot()
@@ -169,6 +171,7 @@ public class PlayerController : MonoBehaviour
         cam.StartCameraShake();
         Instantiate(dustParticleSystem, rightFoot.position, transform.rotation * Quaternion.Euler(-90, 0, 0));
         //play sound
+        FindObjectOfType<AudioManager>().Play("Hodanje");
     }
 
 
