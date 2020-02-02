@@ -3,7 +3,16 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - AssT
+  - CorProp
+  - CTree
+  - GTree
+  - Tree
+  - AssTProp
+  - AssT2
+  - AssT3
+  - AssT4
   layers:
   - Default
   - TransparentFX
