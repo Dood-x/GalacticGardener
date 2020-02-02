@@ -15,6 +15,7 @@ TagManager:
   - AssT4
   - CorruptionManager
   - PauseMenu
+  - ParticleSpawner
   layers:
   - Default
   - TransparentFX
