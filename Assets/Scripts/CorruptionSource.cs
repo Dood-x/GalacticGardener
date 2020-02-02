@@ -20,6 +20,7 @@ public class CorruptionSource : MonoBehaviour
 
     int trees;
     int healedTrees;
+    int helaedAdjacent;
 
     void Start()
     {
@@ -69,14 +70,18 @@ public class CorruptionSource : MonoBehaviour
     {
         healedTrees++;
         cm.GetComponent<CorruptionManager>().UpdateHealed();
+
+
         if (healedTrees == trees)
         {
             //turn off things
-            for (int i = 0; i < allcorupted.Count; ++i)
+            for (int i = 0; i < adjacent.Count; ++i)
             {
 
-                allcorupted[i].corruptable = false;
+                adjacent[i].corruptable = false;
             }
+
+
 
             cm.GetComponent<CorruptionManager>().UpdateResolvedSources(this);
 
