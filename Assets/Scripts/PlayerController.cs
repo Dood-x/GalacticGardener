@@ -66,10 +66,7 @@ public class PlayerController : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-        if(cc)
-        {
-        }
-
+    
         anim = GetComponent<Animator>();
     }
 
@@ -102,7 +99,6 @@ public class PlayerController : MonoBehaviour
             // local forward
             Vector3 forwardLoc = transform.InverseTransformDirection(transform.forward);
 
-            Debug.Log(forwardLoc);
 
             Vector3 localLookDir = Vector3.Slerp(forwardLoc, inputDirection, Time.deltaTime * turnRotationSpeed);
             //transform.rotation = Quaternion.LookRotation(transform.TransformDirection(inputDirection), rb.transform.up);

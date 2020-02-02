@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class CorruptionManager : MonoBehaviour
 {
+    int sources;
+    int resolvedSources;
+
+    public float recorruptTimeMin = 15f;
+    public float recorruptTimeMax = 26f;
     // Start is called before the first frame update
     void Awake()
     {
         GameObject[] asteroids = GameObject.FindGameObjectsWithTag("AssT");
+
+        sources = asteroids.Length;
 
         for(int i = 0; i < asteroids.Length; i++)
         {
@@ -17,13 +24,21 @@ public class CorruptionManager : MonoBehaviour
         GameObject[] trees = GameObject.FindGameObjectsWithTag("Tree");
         for (int i = 0; i < trees.Length; i++)
         {
-            trees[i].AddComponent<Corruption>();
+            Corruption c = trees[i].AddComponent<Corruption>();
+            c.timerMin = recorruptTimeMin;
+            c.timerMax = recorruptTimeMax;
         }
     }
 
     // Update is called once per frame
-    void Update()
+
+    public void UpdateResolvedSources()
     {
-        //if all asteroids are off the game is won
+        resolvedSources++;
+        if (resolvedSources == sources)
+        {
+            // GAME WON
+            Debug.Log("GAME WON");
+        }
     }
 }

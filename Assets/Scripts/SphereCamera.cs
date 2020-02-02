@@ -22,8 +22,8 @@ public class SphereCamera : MonoBehaviour
 
     public float distance = 6f;
 
-    bool inverseXAxis;
-    bool InverseYAxis;
+    public bool inverseXAxis;
+    public bool InverseYAxis;
 
     public GameObject follow;
     public Vector3 lookAtOffset;
@@ -183,7 +183,6 @@ public class SphereCamera : MonoBehaviour
         if (shakeTimer < shakeDuration)
         {
             float amplitude = Mathf.Exp(decreaseFactor * -shakeTimer);
-            Debug.Log(amplitude);
 
             //transform.localPosition = new Vector3(x, y, cameraCenterPos.z);
 

@@ -29,9 +29,12 @@ public class Corruption : MonoBehaviour
 
     bool firstFrame = true;
 
+    public bool corruptable = true;
 
-    private void Start()
+
+    void Start()
     {
+        adjacentCorruption = new List<Corruption>();
         GameObject[] sources = GameObject.FindGameObjectsWithTag("AssT");
 
         float dist = int.MaxValue;
@@ -82,8 +85,8 @@ public class Corruption : MonoBehaviour
         }
 
         //set as healed
-        SetHealed();
-
+        SetCorrupted();
+        corruptionSource.AddTree();
 
     }
 
@@ -104,20 +107,37 @@ public class Corruption : MonoBehaviour
         corrupSide.SetActive(false);
 
         timer = Random.Range(timerMin, timerMax);
+        corruptionSource.UpdateHealed();
+
     }
 
     public void SetCorrupted()
     {
         healed = false;
-        corrupSide.SetActive(false);
-        healedSide.SetActive(true);
+        corrupSide.SetActive(true);
+        healedSide.SetActive(false);
+        corruptionSource.UpdateCorrupted();
     }
 
-    
+    void SetActiveChildren(Transform trans, bool active)
+    {
+        foreach (Transform child in trans)
+        {
+            child.gameObject.SetActive(active);
+        }
+    }
+
+
     public void Corupt()
     {
+        if (!corruptable)
+        {
+            return;
+        }
+
+
         timer -= Time.deltaTime;
-        if(timer <= 0 )
+        if(timer <= 0)
         {
             SetCorrupted();
         }
@@ -141,7 +161,7 @@ public class Corruption : MonoBehaviour
         {
             if (sickboi.healed == true)
             {
-                Corupt();
+                sickboi.Corupt();
             }
 
 
@@ -151,7 +171,7 @@ public class Corruption : MonoBehaviour
     void OnTriggerEnter(Collider collider)
     {
 
-        if(collider.gameObject.tag == "Player"  && collider.gameObject.GetComponent<CharachterController>().fuel > 0 )
+        if(collider.gameObject.tag == "Player" && healed == false /*&& collider.gameObject.GetComponent<CharachterController>().fuel > 0*/ )
         {
             SetHealed();
         }

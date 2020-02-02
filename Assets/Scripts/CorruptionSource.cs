@@ -12,10 +12,20 @@ public class CorruptionSource : MonoBehaviour
 
     public float regenTime;
     
-    public int corruptionStartRadius = 10;
+    public float corruptionStartRadius = 0.1f;
+
+    public bool resolved = false;
+
+    GameObject cm;
+
+    int trees;
+    int healedTrees;
 
     void Start()
     {
+
+        allcorupted = new List<Corruption>();
+        adjacent = new List<Corruption>();
         // find adjacent
         GameObject[] corruptions = GameObject.FindGameObjectsWithTag("Tree");
 
@@ -28,38 +38,64 @@ public class CorruptionSource : MonoBehaviour
                 adjacent.Add(corruptions[i].GetComponent<Corruption>());
             }
 
-            if (distance <= corruptionStartRadius)
-            {
-                corruptions[i].GetComponent<Corruption>().SetCorrupted();
-            }
+            //if (distance <= corruptionStartRadius)
+            //{
+            //    corruptions[i].GetComponent<Corruption>().SetCorrupted();
+            //}
         }
 
-
+        cm = GameObject.FindGameObjectWithTag("CorruptionManager");
 
     }
 
-    void Update()
+
+    //private bool IsAllMissionComplete()
+    //{
+    //    for (int i = 0; i < allcorupted.Count; ++i)
+    //    {
+    //        if (allcorupted[i].healed == false)
+    //        {
+    //            return false;
+    //        }
+    //    }
+
+    //    return true;
+    //}
+
+    public void UpdateHealed()
     {
-        if (IsAllMissionComplete())
+        healedTrees++;
+        Debug.Log(healedTrees);
+        if (healedTrees == trees)
         {
             //turn off things
-        }
-    }
-
-    private bool IsAllMissionComplete()
-    {
-        for (int i = 0; i < allcorupted.Count; ++i)
-        {
-            if (allcorupted[i].healed == false)
+            for (int i = 0; i < allcorupted.Count; ++i)
             {
-                return false;
-            }
-        }
 
-        return true;
+                allcorupted[i].corruptable = false;
+            }
+
+            cm.GetComponent<CorruptionManager>().UpdateResolvedSources();
+
+            resolved = true;
+
+            Debug.Log("Resolved Source");
+        }
     }
 
+    public void UpdateCorrupted()
+    {
+        healedTrees--;
+        Debug.Log(healedTrees);
+    }
 
+    public void AddTree()
+    {
+        trees++;
+        healedTrees++;
+
+        Debug.Log(healedTrees);
+    }
 
 
 
