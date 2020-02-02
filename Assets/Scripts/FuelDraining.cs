@@ -23,7 +23,7 @@ public class FuelDraining : MonoBehaviour
 
     void Update()
     {
-        // uvjwt ako regenamo onda return
+        // uvjet ako regenamo onda return
 
         if (regenHealth == true)
         {
