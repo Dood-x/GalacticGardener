@@ -47,7 +47,10 @@ public class CorruptionSource : MonoBehaviour
         cm = GameObject.FindGameObjectWithTag("CorruptionManager");
 
     }
-
+    void Update()
+    {
+        CheckAdjacent();
+    }
 
     //private bool IsAllMissionComplete()
     //{
@@ -65,6 +68,7 @@ public class CorruptionSource : MonoBehaviour
     public void UpdateHealed()
     {
         healedTrees++;
+        cm.GetComponent<CorruptionManager>().UpdateHealed();
         if (healedTrees == trees)
         {
             //turn off things
@@ -88,16 +92,28 @@ public class CorruptionSource : MonoBehaviour
     public void UpdateCorrupted()
     {
         healedTrees--;
+        cm.GetComponent<CorruptionManager>().UpdateCorrupted();
     }
 
     public void AddTree()
     {
         trees++;
         healedTrees++;
-
     }
 
 
+    public void CheckAdjacent()
+    {
 
+        foreach (Corruption sickboi in adjacent)
+        {
+            if (sickboi.healed == true)
+            {
+                sickboi.Corupt();
+            }
+
+
+        }
+    }
 
 }

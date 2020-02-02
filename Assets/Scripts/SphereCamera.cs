@@ -46,8 +46,6 @@ public class SphereCamera : MonoBehaviour
     public float pivotSmoothTime = 1f;
     Vector3 pivotSpeed;
 
-
-
     private float GetCameraAxis(string axisName)
     {
         try
@@ -79,6 +77,12 @@ public class SphereCamera : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(PauseGameMenu.GameIsPaused)
+        {
+            xDelta = 0;
+            yDelta = 0;
+            return;
+        }
         xDelta = GetCameraAxis("Mouse X") * xSpeed * distance;
         yDelta = GetCameraAxis("Mouse Y") * ySpeed * distance;
 
@@ -130,7 +134,14 @@ public class SphereCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if(cameraShaking)
+        if (PauseGameMenu.GameIsPaused)
+        {
+            xDelta = 0;
+            yDelta = 0;
+            return;
+        }
+
+        if (cameraShaking)
         {
             transform.localPosition = cameraCenterPos;
         }
