@@ -47,7 +47,10 @@ public class CorruptionSource : MonoBehaviour
         cm = GameObject.FindGameObjectWithTag("CorruptionManager");
 
     }
-
+    void Update()
+    {
+        CheckAdjacent();
+    }
 
     //private bool IsAllMissionComplete()
     //{
@@ -99,6 +102,18 @@ public class CorruptionSource : MonoBehaviour
     }
 
 
+    public void CheckAdjacent()
+    {
 
+        foreach (Corruption sickboi in adjacent)
+        {
+            if (sickboi.healed == true)
+            {
+                sickboi.Corupt();
+            }
+
+
+        }
+    }
 
 }
