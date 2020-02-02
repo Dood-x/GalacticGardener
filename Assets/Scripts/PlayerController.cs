@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Audio;
 
 public class PlayerController : MonoBehaviour
 {
@@ -65,7 +66,7 @@ public class PlayerController : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezeRotation;
         }
 
-    
+
         anim = GetComponent<Animator>();
     }
 
@@ -86,7 +87,7 @@ public class PlayerController : MonoBehaviour
 
         inputDirection = Quaternion.Euler(0, localRot.eulerAngles.y, 0) * inputDirection;
 
-        if(anim)
+        if (anim)
         {
             anim.SetFloat("Speed", inputDirection.magnitude);
         }
@@ -161,6 +162,7 @@ public class PlayerController : MonoBehaviour
         cam.StartCameraShake();
         Instantiate(dustParticleSystem, leftFoot.position, transform.rotation * Quaternion.Euler(-90, 0, 0));
         //play sound
+        FindObjectOfType<AudioManager>().Play("Hodanje");
     }
 
     public void StompRightFoot()
@@ -168,6 +170,7 @@ public class PlayerController : MonoBehaviour
         cam.StartCameraShake();
         Instantiate(dustParticleSystem, rightFoot.position, transform.rotation * Quaternion.Euler(-90, 0, 0));
         //play sound
+        FindObjectOfType<AudioManager>().Play("Hodanje");
     }
 
 
