@@ -19,6 +19,8 @@ public class PlayerController : MonoBehaviour
     public float angularMovementSpeed;
     public Vector3 gravityUp;
 
+    public float turnRotationSpeed = 10f;
+
 
     // in degrees
     struct PolarCoordiantes
@@ -76,7 +78,14 @@ public class PlayerController : MonoBehaviour
         //transform.LookAt(transform.TransformDirection(inputDirection), rb.transform.up);
         if (!inputDirection.Equals(Vector3.zero))
         {
-            transform.rotation = Quaternion.LookRotation(transform.TransformDirection(inputDirection), rb.transform.up);
+            // local forward
+            Vector3 forwardLoc = transform.InverseTransformDirection(transform.forward);
+
+            Debug.Log(forwardLoc);
+
+            Vector3 localLookDir = Vector3.Slerp(forwardLoc, inputDirection, Time.deltaTime * turnRotationSpeed);
+            //transform.rotation = Quaternion.LookRotation(transform.TransformDirection(inputDirection), rb.transform.up);
+            transform.rotation = Quaternion.LookRotation(transform.TransformDirection(localLookDir), rb.transform.up);
         }
 
 
@@ -104,7 +113,7 @@ public class PlayerController : MonoBehaviour
         // x y z transform to local coordinte system of the planet
 
         coordinates = world.transform.InverseTransformPoint(coordinates);
-        Debug.Log("coordiantes in local pos " + coordinates);
+        //Debug.Log("coordiantes in local pos " + coordinates);
 
         PolarCoordiantes pc = new PolarCoordiantes();
         pc.radius = coordinates.magnitude;
@@ -113,13 +122,13 @@ public class PlayerController : MonoBehaviour
         yxProjection.x = 0f;
         pc.theta = Vector3.Angle(Vector3.up, yxProjection);
 
-        Debug.Log("theta "+ pc.theta);
+        //Debug.Log("theta "+ pc.theta);
 
         Vector3 xzProjection = coordinates;
         xzProjection.y = 0f;
         pc.theta = Vector3.Angle(Vector3.up, xzProjection);
 
-        Debug.Log("theta " + pc.theta);
+        //Debug.Log("theta " + pc.theta);
 
         return pc;
     }

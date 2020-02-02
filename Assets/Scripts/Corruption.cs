@@ -20,7 +20,12 @@ public class Corruption : MonoBehaviour
 
     public bool checkList;
 
-   
+
+    private void Start()
+    {
+        corruptionSource.allcorupted.Add(this);
+    }
+
     void Update()
     {
         if(Input.GetKeyDown(KeyCode.Space) && cantpress == true)
@@ -30,20 +35,22 @@ public class Corruption : MonoBehaviour
             GetComponent<MeshRenderer>().enabled = false;
             Debug.Log("sakrio se");
             cantpress = false;
-            StartCoroutine(Spawner());
+            //StartCoroutine(Spawner());
            
         }
+        CheckAdjacent();
+
        
     }
 
-    IEnumerator Spawner()
-    {
-        yield return new WaitForSeconds(spawnTimer);
+    //IEnumerator Spawner()
+    //{
+    //    yield return new WaitForSeconds(spawnTimer);
 
-        healed = false;
-        GetComponent<MeshRenderer>().enabled = true;
-        cantpress = true;        
-    }
+    //    healed = false;
+    //    GetComponent<MeshRenderer>().enabled = true;
+    //    cantpress = true;        
+    //}
     public void Corupt()
     {
         timer -= Time.deltaTime;
@@ -55,32 +62,32 @@ public class Corruption : MonoBehaviour
         
     }
 
-    void CheckAdjacent()
+    public void CheckAdjacent()
     {
-        for(int i = 0; i <adjustCorruption.Count; i++)
-        {
-            if(adjustCorruption[i].healed == false)
-            {
-                Corupt();
-            }
-            else if(adjustCorruption[i].healed == true)
-            {
-                Debug.Log("win game");
-            }
-        }
-
-        //foreach(Corruption sickboi in adjustCorruption)
+        //for(int i = 0; i <adjustCorruption.Count; i++)
         //{
-        //    if(sickboi.healed == true)
+        //    if(adjustCorruption[i].healed == false)
         //    {
         //        Corupt();
         //    }
-            
-
+        //    else if(adjustCorruption[i].healed == true)
+        //    {
+        //        Debug.Log("win game");
+        //    }
         //}
+
+        foreach (Corruption sickboi in adjustCorruption)
+        {
+            if (sickboi.healed == true)
+            {
+                Corupt();
+            }
+
+
+        }
     }
 
-     void OnTriggerEnter(Collider collider)
+    void OnTriggerEnter(Collider collider)
     {
 
 
@@ -88,9 +95,7 @@ public class Corruption : MonoBehaviour
         {
             healed = true;
             GetComponent<MeshRenderer>().enabled = false;           
-            cantpress = false;
-            StartCoroutine(Spawner());
-
+           
 
         }
     }
