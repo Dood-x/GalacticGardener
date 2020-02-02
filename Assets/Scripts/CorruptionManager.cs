@@ -19,6 +19,7 @@ public class CorruptionManager : MonoBehaviour
 
     public ParticleSystem corruptionParticle;
     public GameObject healedParticle;
+    public GameObject assteroidDestruction;
     // Start is called before the first frame update
     void Awake()
     {
@@ -67,12 +68,19 @@ public class CorruptionManager : MonoBehaviour
     {
         resolvedSources++;
 
-        GameObject ps = healedParticle;
-        GameObject psinstance = Instantiate(ps, transform.position, transform.rotation);
+        GameObject ps = assteroidDestruction;
+        foreach(Transform child in cs.gameObject.transform)
+        {
+            if(child.tag == "ParticleSpawner")
+            {
+                GameObject psinstance = Instantiate(ps, child.position, child.rotation);
 
-        StartCoroutine("DestoryHealParticles", psinstance);
-        Destroy(cs.gameObject);
-
+                StartCoroutine("DestoryAsteroidParticles", psinstance);
+                Destroy(cs.gameObject);
+                FindObjectOfType<AudioManager>().Play("Crystal");
+            }
+        }
+        
 
         if (resolvedSources == sources)
         {
@@ -92,6 +100,13 @@ public class CorruptionManager : MonoBehaviour
         yield return new WaitForSeconds(3);
         Destroy(ps);
         
+    }
+
+    IEnumerator DestoryAsteroidParticles(GameObject ad)
+    {
+        yield return new WaitForSeconds(20);
+        Destroy(ad);
+
     }
 
     public void UpdateHealed()

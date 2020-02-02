@@ -8,4 +8,10 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
     guid: 7658629ac5e784d458cd5dc988913c85
+  - enabled: 1
+    path: Assets/Scenes/PlanetPaintTest.unity
+    guid: c757c5f4e4acdd74090213a166863d43
+  - enabled: 1
+    path: Assets/Scenes/EndingScene.unity
+    guid: ce5f291936f1c474491d9210fe9de972
   m_configObjects: {}
