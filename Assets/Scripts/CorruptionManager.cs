@@ -10,6 +10,9 @@ public class CorruptionManager : MonoBehaviour
     public float recorruptTimeMin = 15f;
     public float recorruptTimeMax = 26f;
 
+    int treeAmount;
+    int healed;
+
     public ParticleSystem corruptionParticle;
     public GameObject healedParticle;
     // Start is called before the first frame update
@@ -31,6 +34,9 @@ public class CorruptionManager : MonoBehaviour
             c.timerMin = recorruptTimeMin;
             c.timerMax = recorruptTimeMax;
         }
+
+        treeAmount = trees.Length;
+        healed = treeAmount;
     }
 
     // Update is called once per frame
@@ -59,5 +65,16 @@ public class CorruptionManager : MonoBehaviour
         
     }
 
+    public void UpdateHealed()
+    {
+        healed++;
+        Debug.Log(((float)healed) / treeAmount);
+    }
+
+    public void UpdateCorrupted()
+    {
+        healed--;
+        Debug.Log(((float)healed) / treeAmount);
+    }
 
 }

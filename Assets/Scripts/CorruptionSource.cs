@@ -65,6 +65,7 @@ public class CorruptionSource : MonoBehaviour
     public void UpdateHealed()
     {
         healedTrees++;
+        cm.GetComponent<CorruptionManager>().UpdateHealed();
         if (healedTrees == trees)
         {
             //turn off things
@@ -88,13 +89,13 @@ public class CorruptionSource : MonoBehaviour
     public void UpdateCorrupted()
     {
         healedTrees--;
+        cm.GetComponent<CorruptionManager>().UpdateCorrupted();
     }
 
     public void AddTree()
     {
         trees++;
         healedTrees++;
-
     }
 
 

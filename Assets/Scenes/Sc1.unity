@@ -1844,11 +1844,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Robo_riggan_2
       objectReference: {fileID: 0}
-    - target: {fileID: 2269839610927989840, guid: b6cecf524b2770244a9d05a50df5870b,
-        type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
     - target: {fileID: 3016090968268977731, guid: b6cecf524b2770244a9d05a50df5870b,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1919,11 +1914,6 @@ PrefabInstance:
       propertyPath: cam
       value: 
       objectReference: {fileID: 1880994153}
-    - target: {fileID: 7827812571975957028, guid: b6cecf524b2770244a9d05a50df5870b,
-        type: 3}
-      propertyPath: moveSpeed
-      value: 30
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b6cecf524b2770244a9d05a50df5870b, type: 3}
 --- !u!1 &8296172667604846265 stripped
