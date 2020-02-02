@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2825263076780701451}
-  - component: {fileID: 2825263076780701448}
+  - component: {fileID: 5810338948672139580}
   m_Layer: 0
   m_Name: AudioManager
   m_TagString: Untagged
@@ -24,14 +24,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2825263076780701449}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1015.1126, y: -561.6017, z: 340.45148}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2825263076780701448
+--- !u!114 &5810338948672139580
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -40,36 +40,36 @@ MonoBehaviour:
   m_GameObject: {fileID: 2825263076780701449}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fa390511879777b49b9456161d62a7f6, type: 3}
+  m_Script: {fileID: 11500000, guid: fcd042fc4f432ed469553a3720e3550a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   sounds:
   - name: Hodanje
-    clip: {fileID: 8300000, guid: 51aa1348933858446acf6134f7d1f54d, type: 3}
-    volume: 0.25
-    pitch: 2
+    clip: {fileID: 8300000, guid: 5f2614c2a20dd5f4aa8eda0673f4dfdc, type: 3}
+    volume: 0.634
+    pitch: 1.35
     loop: 0
-    source: {fileID: 0}
-  - name: Theme
-    clip: {fileID: 8300000, guid: 01f6187f02acaa149a9fbcb20a523eaf, type: 3}
-    volume: 1
-    pitch: 1
-    loop: 1
     source: {fileID: 0}
   - name: Healed
     clip: {fileID: 8300000, guid: 23520ffd994471a4893f9bf896b082f2, type: 3}
-    volume: 0.8
+    volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
   - name: Corrupted
-    clip: {fileID: 8300000, guid: eb30a3f3b68437d42ba8e72394836bff, type: 3}
+    clip: {fileID: 8300000, guid: 68623c16fd4072e4d91c4ef70c644312, type: 3}
     volume: 1
     pitch: 1
     loop: 0
     source: {fileID: 0}
+  - name: Theme
+    clip: {fileID: 8300000, guid: 1a666273e7e411d4f92605ba11926271, type: 3}
+    volume: 1
+    pitch: 1
+    loop: 1
+    source: {fileID: 0}
   - name: Crystal
-    clip: {fileID: 8300000, guid: e88b8af474069a14189a30f1146eb9d7, type: 3}
+    clip: {fileID: 8300000, guid: 6bfbce64ed084db4296ca065faa495f9, type: 3}
     volume: 1
     pitch: 1
     loop: 0
