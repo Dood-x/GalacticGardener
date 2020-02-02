@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CorruptionManager : MonoBehaviour
 {
@@ -12,6 +13,9 @@ public class CorruptionManager : MonoBehaviour
 
     int treeAmount;
     int healed;
+
+    public GameObject tutorialCanvas;
+    public GameObject winCanvas;
 
     public ParticleSystem corruptionParticle;
     public GameObject healedParticle;
@@ -40,6 +44,24 @@ public class CorruptionManager : MonoBehaviour
     }
 
     // Update is called once per frame
+    void Start()
+    {
+        StartCoroutine("TutorialCanvas");
+    }
+
+    IEnumerator TutorialCanvas()
+    {
+        tutorialCanvas.SetActive(true);
+        yield return new WaitForSeconds(3);
+        tutorialCanvas.SetActive(false);
+    }
+
+    IEnumerator Won()
+    {
+        winCanvas.SetActive(true);
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene("EndingScene");
+    }
 
     public void UpdateResolvedSources(CorruptionSource cs)
     {
@@ -51,12 +73,19 @@ public class CorruptionManager : MonoBehaviour
         StartCoroutine("DestoryHealParticles", psinstance);
         Destroy(cs.gameObject);
 
+
         if (resolvedSources == sources)
         {
             // GAME WON
             Debug.Log("GAME WON");
+
+            StartCoroutine("Won");
+
+
         }
     }
+
+ 
 
     IEnumerator DestoryHealParticles(GameObject ps)
     {
