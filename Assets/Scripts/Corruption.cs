@@ -109,6 +109,16 @@ public class Corruption : MonoBehaviour
         timer = Random.Range(timerMin, timerMax);
         corruptionSource.UpdateHealed();
 
+        GameObject ps = corruptionSource.cm.GetComponent<CorruptionManager>().healedParticle;
+        GameObject psinstance = Instantiate(ps, transform.position, transform.rotation);
+
+        StartCoroutine("DestoryHealParticles", psinstance);
+    }
+
+    IEnumerator DestoryHealParticles(GameObject ps)
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(ps);
     }
 
     public void SetCorrupted()
@@ -117,6 +127,9 @@ public class Corruption : MonoBehaviour
         corrupSide.SetActive(true);
         healedSide.SetActive(false);
         corruptionSource.UpdateCorrupted();
+        ParticleSystem ps = corruptionSource.cm.GetComponent<CorruptionManager>().corruptionParticle;
+        Instantiate(ps, transform.position, transform.rotation * Quaternion.Euler(-90, 0, 0));
+
     }
 
     void SetActiveChildren(Transform trans, bool active)

@@ -16,7 +16,7 @@ public class CorruptionSource : MonoBehaviour
 
     public bool resolved = false;
 
-    GameObject cm;
+    public GameObject cm;
 
     int trees;
     int healedTrees;
@@ -65,7 +65,6 @@ public class CorruptionSource : MonoBehaviour
     public void UpdateHealed()
     {
         healedTrees++;
-        Debug.Log(healedTrees);
         if (healedTrees == trees)
         {
             //turn off things
@@ -75,18 +74,20 @@ public class CorruptionSource : MonoBehaviour
                 allcorupted[i].corruptable = false;
             }
 
-            cm.GetComponent<CorruptionManager>().UpdateResolvedSources();
+            cm.GetComponent<CorruptionManager>().UpdateResolvedSources(this);
 
             resolved = true;
 
             Debug.Log("Resolved Source");
+
         }
     }
+
+  
 
     public void UpdateCorrupted()
     {
         healedTrees--;
-        Debug.Log(healedTrees);
     }
 
     public void AddTree()
@@ -94,7 +95,6 @@ public class CorruptionSource : MonoBehaviour
         trees++;
         healedTrees++;
 
-        Debug.Log(healedTrees);
     }
 
 

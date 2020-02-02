@@ -9,6 +9,9 @@ public class CorruptionManager : MonoBehaviour
 
     public float recorruptTimeMin = 15f;
     public float recorruptTimeMax = 26f;
+
+    public ParticleSystem corruptionParticle;
+    public GameObject healedParticle;
     // Start is called before the first frame update
     void Awake()
     {
@@ -32,13 +35,29 @@ public class CorruptionManager : MonoBehaviour
 
     // Update is called once per frame
 
-    public void UpdateResolvedSources()
+    public void UpdateResolvedSources(CorruptionSource cs)
     {
         resolvedSources++;
+
+        GameObject ps = healedParticle;
+        GameObject psinstance = Instantiate(ps, transform.position, transform.rotation);
+
+        StartCoroutine("DestoryHealParticles", psinstance);
+        Destroy(cs.gameObject);
+
         if (resolvedSources == sources)
         {
             // GAME WON
             Debug.Log("GAME WON");
         }
     }
+
+    IEnumerator DestoryHealParticles(GameObject ps)
+    {
+        yield return new WaitForSeconds(3);
+        Destroy(ps);
+        
+    }
+
+
 }

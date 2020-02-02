@@ -13,6 +13,7 @@ TagManager:
   - AssT2
   - AssT3
   - AssT4
+  - CorruptionManager
   layers:
   - Default
   - TransparentFX
