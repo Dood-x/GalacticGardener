@@ -164,14 +164,14 @@ public class PlayerController : MonoBehaviour
     public void StompLeftFoot()
     {
         cam.StartCameraShake();
-        Instantiate(dustParticleSystem, leftFoot.position, transform.rotation);
+        Instantiate(dustParticleSystem, leftFoot.position, transform.rotation * Quaternion.Euler(-90, 0, 0));
         //play sound
     }
 
     public void StompRightFoot()
     {
         cam.StartCameraShake();
-        Instantiate(dustParticleSystem, rightFoot.position, transform.rotation);
+        Instantiate(dustParticleSystem, rightFoot.position, transform.rotation * Quaternion.Euler(-90, 0, 0));
         //play sound
     }
 
