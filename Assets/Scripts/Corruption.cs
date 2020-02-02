@@ -104,7 +104,6 @@ public class Corruption : MonoBehaviour
     {
         healed = true;
         healedSide.SetActive(true);
-        FindObjectOfType<AudioManager>().Play("Healed");
         corrupSide.SetActive(false);
 
         timer = Random.Range(timerMin, timerMax);
@@ -126,7 +125,6 @@ public class Corruption : MonoBehaviour
     {
         healed = false;
         corrupSide.SetActive(true);
-        FindObjectOfType<AudioManager>().Play("Corrupted");
         healedSide.SetActive(false);
         corruptionSource.UpdateCorrupted();
         ParticleSystem ps = corruptionSource.cm.GetComponent<CorruptionManager>().corruptionParticle;
